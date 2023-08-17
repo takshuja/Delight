@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="src/css/index.css">
+
+</head>
+
+<body>
+    <div class="nav-bar shadow bg-body">
+        <img class="brand-name" src="Assets/logo.png">
+            <!-- Delight de Heaven -->
+
+    </img>
+        <div class="search">
+            <div>
+                <select name="select" id="dropdown">
+
+                    <option value="">Categories</option>
+                    <option value="" v-for="index in 10" :key="index">Category {{index}}</option>
+
+                </select>
+            </div>
+            <div class="search-bar">
+                <input type="search" id="search" placeholder="search">
+                <button class="material-icons search-icon">
+                    search
+
+                </button>
+
+            </div>
+        </div>
+        <div class="icon-group" id="icon-group">
+            <div class="icon">
+                <span class="material-icons icon-size position-relative" @click="notifications.inbox++" onclick="window.location.href='src/html/login_form.html'">
+                    person
+                </span>
+                <div class="notification-badge">
+                    {{notifications.inbox}}
+                </div>
+            </div>
+            <div class="icon">
+                <span class="material-icons icon-size" style="color: red;" @click="notifications.wishlist++">
+                    favorite
+                </span>
+                <div class="notification-badge">
+                    {{notifications.wishlist}}
+
+                </div>
+            </div>
+            <div class="icon">
+                <span class="material-icons icon-size" @click="notifications.cart++">
+                    shopping_bag
+                </span>
+                <div class="notification-badge">
+                    {{notifications.cart}}
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+
+    <div class="container-fluid">
+        <div class="row mx-5">
+            <div v-for="index in 21" :key="index" class="card m-5 shadow-lg bg-body" style="width: 19rem;">
+                <img src="data:image/jpeg;base64,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" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card {{index}}</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's
+                        content.</p>
+                        
+                        <div 
+                            class="d-flex justify-content-between">
+                            <button
+                                
+                                class="btn btn-primary bg-gradient shadow-lg w-50 card-buttons m-1">
+                                Details</button>
+
+                            <button
+                            onclick="window.location.href='src/html/payment_tab.html'"
+                            class="btn w-50 btn-success bg-gradient shadow-lg card-buttons btn-sm m-1">Add to cart</button>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="src/javascript/index.js"></script>
+</body>
+
+</html>

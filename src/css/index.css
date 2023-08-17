@@ -1,0 +1,102 @@
+body {
+    background-color: #eee;
+}
+
+
+
+
+
+.nav-bar,
+.search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    z-index: 1;
+}
+
+.nav-bar {
+    justify-content: space-evenly;
+    border-radius: 6px;
+    padding: 15px 10px;
+    /* margin-top: 20px; */
+    margin-bottom: 30px;
+    position: sticky;
+    width: 100%;
+    top: 0;
+    overflow: hidden;
+    background-color: white;
+}
+
+.brand-name {
+    width: 250px;
+}
+
+.icon-size {
+    font-size: 30px;
+}
+
+.icon-group {
+    display: flex;
+    justify-content: space-between;
+    width: 130px;
+    height: 30px;
+}
+
+.icon {
+    margin: 0 5px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+
+#dropdown {
+    height: 44px;
+    border: 1px solid black;
+    border-radius: 16px 0 0 16px;
+    font-size: 18px;
+    padding: 0 15px;
+    font-size: 20px;
+    background-color: #eee;
+
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar .search-icon {
+    position: relative;
+    right: 40px;
+    border: none;
+    background-color: transparent;
+}
+
+
+
+#search {
+
+    height: 44px;
+    width: 450px;
+    border-radius: 0 16px 16px 0;
+    border: 1px solid black;
+    outline: none;
+    border-left: 0;
+    font-size: 20px;
+    padding: 0 20px;
+}
+
+
+.notification-badge {
+    position: relative;
+    color: black;
+    bottom: 46px;
+    left: 14px;
+    background: maroon;
+    color: white;
+    text-align: center;
+    border-radius: 51px;
+    font-size: 11px;
+    width: 20px;
+    /* border: 2px solid white; */
+}

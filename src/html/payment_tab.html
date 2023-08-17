@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Portal</title>
+
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+    <style>
+        .credit-card {
+            width: 400px;
+            height: 260px;
+            border-radius: 8px;
+        }
+
+
+
+        .card-header {
+            float: right;
+        }
+
+        .card-chip img {
+            width: 90px;
+            position: relative;
+            top: 30px;
+            display: block;
+            /* border: 1px solid red; */
+        }
+
+
+
+        .card-text {
+            font-size: 30px;
+            text-align: center;
+            position: absolute;
+            bottom: 80px;
+            left: 14%;
+        }
+
+        .card-input {
+            background: transparent;
+            border: none;
+            text-align: center;
+            color: white;
+        }
+
+
+        .card-meta {
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+        }
+
+
+        .card-header img {
+            /* border: 1px solid red; */
+            width: 100px;
+            position: absolute;
+            right: 20px;
+            top: 3px;
+        }
+
+
+        .number-input {
+            text-align: start;
+            height: 50px;
+            width: 450px;
+            font-size: 28px;
+            outline: none;
+        }
+
+
+        .card-info {
+            width: 450px;
+        }
+
+        /* style="width: 18rem;" */
+    </style>
+
+
+</head>
+
+<body style="height: 100%;">
+    <div class="container d-flex w-100 h-100 justify-content-center align-items-center flex-column">
+
+
+        <div class="card credit-card bg-dark text-light">
+
+            <div class="card-body">
+
+                <div class="card-header float-right">
+                    <img src="../../Assets/visa-logo-png-transparent.png" alt="" srcset="">
+                </div>
+
+                <div class="card-chip">
+                    <img src="../../Assets/card-chip.png" alt="">
+                </div>
+
+
+                <div class="card-text card-number d-flex flex-row justify-content-center">
+                    <span class="number-group">
+                        {{cardNumberFormatted}}
+                    </span>
+                </div>
+
+                <div class="container d-flex card-meta justify-content-between">
+                    <div class="card-holder">
+                        <span class="holder-title font-monospace small shadow  text-secondary">Card Holder</span>
+                        <br>
+                        {{card.owner}}
+                    </div>
+
+                    <div class="card-holder">
+                        <span class="holder-title font-monospace small shadow  text-secondary">Valid Thru</span>
+                        <br>
+                        <!-- {{card.expiration.month}}/{{card.expiration.year}} -->
+                        {{cardExpiration}}
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="container mt-5 card-info">
+            <div class="card-input-label">
+                <div class="h4 font-monospace">
+                    Card number
+                </div>
+            </div>
+            <input v-model="card.number" type="text" id="cardNumberInput" maxlength="16" required ref="card.number"
+                 name="card[number]"
+                class="number-input px-3 border border-secondary border-2 rounded shadow">
+            <div class="card-input-label">
+                <div class="h4 font-monospace mt-3">
+                    Card holder name
+                </div>
+            </div>
+            <input v-model="card.owner" type="text" id="cardNumberInput" maxlength="16" required ref="card.number"
+                 name="card[number]"
+                class="number-input px-3 border border-secondary border-2 rounded shadow">
+            
+            <div class="card-input-label">
+                <div class="h4 font-monospace mt-3">
+                    Expiration
+                </div>
+            </div>
+            
+            <div class="d-flex">
+                <select name="" id="" class="form-select w-50 m-1 shadow-lg border border-2 border-secondary"  v-model="card.expiration.month" aria-placeholder="">
+                    <option value="" disabled selected>Month</option>
+                    <option v-for="month in months">{{month}}</option>
+                </select>
+            
+                <select name="card[expiration][year]" class="form-select w-50 m-1 shadow-lg border border-2 border-secondary" v-model="card.expiration.year">
+                    <option value="" disabled selected>Year</option>
+                    <option v-for="year in years" >{{year}}</option>
+                </select>
+            
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <script>
+        Vue.createApp({
+
+            data() {
+                return {
+                    card: {
+                        number: '',
+                        numbers: '',
+                        owner: '',
+                        expiration: {
+                            month: '',
+                            year: ''
+                        },
+                        cvc: '',
+                        years: {
+                            
+                        }
+                    },
+                }
+            },
+
+            methods: {
+                formatCardNumber: function () {
+                    var formattedNumber = cardNumberFormatted;
+
+
+                }
+            },
+
+            computed: {
+                cardNumberFormatted: function () {
+                    var numberChunks = this.card.number.match(/.{1,4}/g);
+                    if (numberChunks)
+                        return numberChunks.join(' ');
+                    else
+                        return '';
+                },
+
+                months: function() {
+                    return [
+                        '01', '02', '03', '04',
+                        '05', '06', '07', '08',
+                        '09', '10', '11', '12'
+                    ];
+                },
+
+                years: function () {
+                var years = [];
+                var currentYear = (new Date()).getFullYear() % 2000;
+
+                for (var i = 0; i < 18; i++)
+                    years.push(currentYear + i);
+
+                return years;
+                },
+
+                   cardExpiration: function () {
+                    if (!this.card.expiration.month || !this.card.expiration.year)
+                        return '';
+
+                    return this.card.expiration.month + '/' + this.card.expiration.year;
+                },
+            },
+            watch: {
+                'card.number': function (newNumber) {
+                    this.card.number = newNumber.replace(/[^0-9]/gim, ' ');
+                },
+            }
+        }).mount('body');
+
+    </script>
+
+
+</body>
+
+</html>
