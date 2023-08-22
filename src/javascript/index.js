@@ -18,3 +18,9 @@ var app = Vue.createApp({
 })
 
 app.mount('body')
+
+
+
+function addToCart() {
+    
+}

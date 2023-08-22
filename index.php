@@ -32,12 +32,11 @@
     <div class="container-fluid mx-5">
         <div class="row mx-5">
             <?php
-                for ($i = 0; $i <= 2; $i++) {
-                    include 'src/php/card_template.php';
-                }
+                include 'src/php/card_template.php';
             ?>
         </div>
     </div>
+    <a href="cart"><button>Cart</button></a>
 </body>
 
 </html>
